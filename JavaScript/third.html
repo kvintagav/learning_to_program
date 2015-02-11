@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Factorials</title>
+	</head>
+	<body>
+		<script >
+		function test() {
+			var i =0;
+			if (i == 0){
+				var j =0;
+				for (var k = 0 ; k <10 ; k++){
+					document.write("k="+k+"</br>");
+				}
+				document.write("k="+k+"</br>")
+				
+			}
+			document.write("j="+j+"</br>")
+		}
+
+		function fufu() {
+			var scope;
+			alert(scope);
+			scope = "докальная";
+			alert(scope);
+		}
+		document.write("Отсутствие блочной видимости</br>");
+		test();
+		fufu();
+		</script>	
+	</body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Try_Catch_fin</title>
+	</head>
+	<body>
+		<h3>Проверка try catch finnaly</h3>
+		<script>
+		function factorial(x) {
+			if (x <= 0) throw new Error("x не может быть отрицательным ,нулем и ничем");
+			for(var f = 1; x > 1; f *= x, x--) /* пустое тело цикла */ ;
+			return f;
+		}
+		
+		try {
+			var n = prompt("Введите положительное число")
+			var f = factorial(n);
+			alert(n+"!= "+f)
+		}
+		catch (ex){
+			alert(ex);
+		}
+		</script>
+	</body>
+</html>

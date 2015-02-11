@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Try_Finally</title>
+	</head>
+	<body>
+		<h3>Проверка try  finnaly</h3>
+		<script>
+		var mass = new Array();
+		
+		document.write("ведите числа<br>")
+		
+		
+		for (var i =0 ; i<5 ; i++){
+			mass[i]= Number(prompt("Введите число №"+i));
+		}
+		document.write("получен массив: "+mass+"<br>")
+		
+		var j= 0 , total = 0;
+		while (j<mass.length){
+		
+			try{
+				if ((typeof mass[j]!="number")||isNaN(mass[j]))
+					continue;
+				total += mass[j];
+			}
+			finally {
+				j++;
+			}
+			
+		}
+		document.write("результат равен= "+total)
+		
+		</script>
+	</body>
+</html>

@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Фибоначчи</title>
+	</head>
+	<body>
+		<script>
+		document.write("<h2>Числа Фибоначчи</h2>");
+		for (i=0, j=1, k=0, fib=0;i<10;i++,fib=j+k,j=k,k=fib){
+				document.write("Fibonacci(" + i +")="+fib);
+				var fi = k/j;
+				document.write("<br>");
+				document.write("number fi: "+fi);
+				document.write("<br>");
+				//location.reload(true);
+
+			}
+		
+
+		</script>
+	</body>
+</html>

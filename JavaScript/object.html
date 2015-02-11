@@ -1,0 +1,42 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Object</title>
+	</head>
+	<body>
+		<h3>Изучение объектов</h3>	
+		<script>
+
+		function DisplayPropertyNames(obj) {
+			var names = "";
+			for(var name in obj) names += name + "\n";
+			alert(names);
+			}
+		var book = new Object();
+		book.name_book = "Gaga";
+		book.author = new Object();
+		book.author.first_name = "Adgar";
+		book.author.second_name = "Gadaev";
+		
+		DisplayPropertyNames(book);
+		
+		var customer ={A0:1,A1:3,A2:5,A3:6}
+		var addr = 0;
+		for(i = 0; i < 4; i++) {
+			addr += customer["A" + i] ;
+			//Объект как ассоциативный массив, к объекту можно обратиться через []
+		}
+		alert(addr);
+
+		var value = 0;
+		var portfolio = {gas:4, oil:7};
+		for (stock in portfolio) {
+			// Для каждого вида акций в портфеле получаем стоимость
+			// одной акции и умножаем ее на число акций.
+			value += portfolio[stock];
+		}
+		alert(value);
+		</script>
+		
+	</body>
+</html>

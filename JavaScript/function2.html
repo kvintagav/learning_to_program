@@ -1,0 +1,157 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Function</title>
+	</head>
+	<body>
+		<h2>Function2</h2>
+		<script>
+		//Использование свойств объекта в качестве аргументов
+		function arraycopy(from, from_start, to, to_start, length){
+			for ( var i =from_start ,j=to_start; i<(length+from_start) ; i++ , j++){
+				to[j]=from[i]
+			}
+		}
+		function easycopy(args){
+			arraycopy(args.from,
+						args.from_start || 0,
+						args.to, 
+						args.to_start || 0,
+						args.length);
+		}
+		
+		var a =[1,2,3,4];
+		var b = new Array(4);
+		easycopy({from:a, to:b, length:4});
+		document.write(a + "  "+b + "<br>");
+		
+		//Проверка типов аргументов
+		// сложение элементов массива, строгая типизация
+		function sum(a){
+			if ((a instanceof Array) || (a && typeof a=="object" && "length" in a)){ //или объект похожий на массив))
+				var total = 0;
+				for (var i = 0; i < a.length; i++){
+					var element = a[i];
+					if (!element) continue; //игнорировать null and undefined
+					if (typeof element =="number") total +=element;
+					else throw new Error("sum(): все элементы должны быть числами")
+					//можно не делать else, тогда будет просто игнорировать не числа
+				}
+				return total;
+
+			}
+			else throw new Error("sum(): аргумент должен быть массивом или объектом с массивом и методом length");
+		}
+		// сложение всего что передается с попыткой преобразовать в числа, гибкая типизация
+		function flexsum(a){
+			var total = 0;
+			for (var i = 0; i<arguments.length; i++){
+				var element = arguments[i];
+				if (!element) continue;
+
+				var n;
+				switch (typeof element){
+					case "number":
+						n = element;
+						break;
+					case "object":
+						if (element instanceof Array) // Рекурсивный обход массива
+							n = flexsum.apply(this, element);
+						else n = element.valueOf( ); // Для других объектов вызвать valueOf
+						break;
+					case "function":
+						n = element();
+						break;	
+					case "string":
+						n = parseFloat(element);
+						break;
+					case "boolean":
+						n = NaN;
+						break;
+				}
+				if (typeof n == "number" && !isNaN(n)) total += n;
+				//else
+				//	throw new Error("sum(): ошибка преобразования  в число");
+			}
+			return total;
+		}
+
+		var s= [1,3,"dd",[2,3],{A:[1],B:3}];
+
+		var rez =flexsum(s);
+		document.write(s +" rezult: " +rez+"<br>");
+
+		//Функция может передаваться как данные фукции
+		function add(x,y) {return x + y;}
+		function subtract(x,y) { return x - y;}
+		function multiply(x,y) {return x * y;}
+		function devide(x,y) {return x / y;}
+		
+		function operate(operator, operand1 , operand2){
+			return operator(operand1,operand2)
+		}
+		//var i = operate(add, operate(add, 2, 3), operate(multiply, 4, 5)); //((2+3)+(4*5))
+
+		//  тоже самое, только с помощью функциональных литералов внутри литерала объекта
+		var operators ={
+			add: 	function(x,y) {return x + y;},
+			subtract: 	function(x,y) {return x - y;},
+			multiply: 	function(x,y) {return x * y;},
+			devide: 	function(x,y) {return x / y;},
+				 	
+		}
+		function operate2(op_name,operand1,operand2){
+			if (typeof operators[op_name] == "function")
+				return operators[op_name](operand1,operand2);
+			else throw "неизвестный оператор";
+		}
+		var hh= operate2("add",2,1);
+		//var hh=0;
+		document.write("результат add 2 + 1 :  " + hh+"<br>")
+
+		//Проверка количесва переданных аргументов
+		function check(args) {
+			var actual = args.length; // Фактическое число аргументов
+			var expected = args.callee.length; // Ожидаемое число аргументов
+			if (actual != expected) { // Если числа не совпадают, генерируется исключение
+				throw new Error("неверное число аргументов: ожидается: " +
+				expected + "; фактически передано " + actual);
+			}
+		}
+
+		function f(x, y, z) {
+			check(arguments);
+			return x + y + z;
+		}
+
+		// Возвращает массив, содержащий имена перечислимых свойств объекта "o"
+		function getPropertyNames(/* объект */o) {
+			var r = [];
+			for(name in o) r.push(name);
+			return r;
+		}
+
+		// Копирует перечислимые свойства объекта "from" в объект "to".
+		// Если аргумент "to" равен null, создается новый объект.
+		// Функция возвращает объект "to" или вновь созданный объект.
+		function copyProperties(/* объект */ from, /* необязательный объект */ to) {
+			if (!to) to = {};
+			for(p in from) to[p] = from[p];
+			return to;
+		}
+		
+		// Копирует перечислимые свойства объекта "from" в объект "to",
+		// но только те, которые еще не определены в объекте "to".
+		// Это может оказаться необходимым, например, когда объект "from" содержит
+		// значения по умолчанию, которые необходимо скопировать в свойства,
+		// если они еще не были определены в объекте "to".
+		function copyUndefinedProperties(/* объект */ from, /* объект */ to) {
+			for(p in from) {
+				if (!p in to) to[p] = from[p];
+			}
+		}
+
+		</script>
+		
+	</body>
+</html>

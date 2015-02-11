@@ -1,5 +1,5 @@
 import sys
-
+"""сортировка подсчетом количества вхождений или составления словаря """
 n = int(input())
 #lineIn= list(map(int, input().split()))
 input = sys.stdin.read()

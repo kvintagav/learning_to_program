@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Break</title>
+	</head>
+	<body>
+		<input type="button" value ="Привет" onclick = "welcome();">
+		<script>
+		function welcome() { 
+			alert("Привет, ты попался");
+			document.write('<input type="button" value ="Привет" onclick = "welcome();"><br>');
+		}
+		document.write("<h2>проверка Break</h2>")
+		outerloop:
+		for(var i = 0; i < 10; i++) {
+			innerloop:
+			for(var j = 0; j < 10; j++) {
+				if (j > 3) break; // Выход из самого внутреннего цикла
+				if (i == 2) break innerloop; // То же самое
+				if (i == 4) break outerloop; // Выход из внешнего цикла
+				document.write("i = " + i + " j = " + j + "<br>");
+			}
+		}
+
+		document.write("FINAL i = " + i + " j = " + j + "<br>");
+		
+		document.write("<h3>Вывод свойств объекта</h3>")
+		var my_object = {a:1, b:2, c:3};
+		for (var prop in my_object) {
+			document.write("имя: " + prop + "; значение: " + my_object[prop], "<br>");
+		}
+
+		</script>
+	</body>
+</html>

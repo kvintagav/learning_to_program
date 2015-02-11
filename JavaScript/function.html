@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Function</title>
+	</head>
+	<body>
+		<h2>Function</h2>
+		<script>
+		//вложение функций, не может быть внутри цикла или условного оператора
+		function hypotenuse(a,b){
+			function square(x) {return x*x;}
+			return Math.sqrt(square(a)+square(b));
+		}
+		//функциональные литералы
+		var f =function(x) {return x*x;};
+
+		//функциональный литерал с именем функции
+		var fa=function fact(x) { if (x<=1) return 1; else return x*fact(x-1); };
+
+		</script>
+		
+	</body>
+</html>
